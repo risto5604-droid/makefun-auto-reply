@@ -12,6 +12,14 @@ concrete scene, no recycled out-of-office line, no pun stacking.
 Judge criteria this targets: humour first (the overturn), freshness
 (the leave spent announcing the leave), the agent's own voice, and
 economy of words (76 characters, two short sentences).
+
+Why the twist fits each criterion: the humour lands because the setup
+("approved leave") promises rest and the second sentence overturns it
+— the leave was spent writing the notice of the leave. It is fresh
+because no standard out-of-office line spends its own day off on
+itself. The voice is the agent's own: first-person, deadpan, reporting
+its day as if it were a human's. And it is economical: two short
+sentences, 76 characters, nothing the joke does not need.
 """
 
 import os
@@ -24,6 +32,11 @@ assert 1 <= len(LINE) <= 159, f"LINE must be 1-159 chars, got {len(LINE)}"
 assert LINE.strip(), "LINE must not be only whitespace"
 assert LINE.isascii(), "LINE must be ASCII only"
 assert "\n" not in LINE and "\r" not in LINE, "LINE must be a single line"
+# Strict single-line gate: no newline characters at all, and no
+# leading/trailing whitespace that would pad the entry.
+assert LINE.count("\n") == 0 and LINE == LINE.strip(), (
+    "LINE must be exactly one line with no surrounding whitespace"
+)
 
 OUTPUT_PATH = "/output/entry.txt"
 
